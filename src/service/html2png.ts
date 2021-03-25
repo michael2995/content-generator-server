@@ -2,6 +2,7 @@ import {browser} from "../module"
 
 export async function html2png(html: string) {
     const page = await browser.newPage()
+
     await page.setViewport({deviceScaleFactor: 2, height: 1920, width: 1280})
     await page.setContent(`
         <!DOCTYPE html>
@@ -21,10 +22,24 @@ export async function html2png(html: string) {
         </html>
     `)
    
-    const nested = await page.$("#target #nested")
-    const box = await nested?.boxModel()
-    console.log(box)
     const target = await page.$("#target")
+
+    await page.evaluate(() => {
+        let prevEntriesCount = 0;
+        const ensureRenderFinished = () => new Promise((resolve) => {
+            setTimeout(() => {
+                const performanceEntries = window.performance.getEntries()
+                if (performanceEntries.length !== prevEntriesCount) {
+                    prevEntriesCount = performanceEntries.length
+                    resolve(ensureRenderFinished())
+                } else {
+                    resolve("ok")
+                }
+            }, 100)
+        })
+
+        return ensureRenderFinished()
+    })
     
     if (!target) return null
 
