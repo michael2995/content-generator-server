@@ -21,6 +21,8 @@ export async function html2png(html: string) {
         </html>
     `)
 
+    await page.waitForSelector("#target #nested")
+    
     const target = await page.$("#target")
     
     if (!target) return null
