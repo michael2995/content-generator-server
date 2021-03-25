@@ -1,11 +1,8 @@
 import {browser} from "../module"
-import {v4 as uuidV4} from "uuid"
-import path from "path"
 
-export async function convertToPng(html: string) {    
+export async function html2png(html: string) {
     const page = await browser.newPage()
-    console.log(html)
-
+    await page.setViewport({deviceScaleFactor: 10, height: 1920, width: 1280})
     await page.setContent(`
         <!DOCTYPE html>
         <html lang="en">
@@ -14,6 +11,7 @@ export async function convertToPng(html: string) {
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Document</title>
+            <link href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css" rel="stylesheet" type="text/css">
         </head>
         <body>
             <div id="target" style="width: fit-content; height: fit-content;">
@@ -24,12 +22,12 @@ export async function convertToPng(html: string) {
     `)
 
     const target = await page.$("#target")
-    const id = uuidV4()
-    const filePath = path.resolve(__dirname, `${id}.png`)
-    const buffer = await target?.screenshot({path: filePath})
-    // await page.close()
-    return {
-        buffer,
-        filePath,
-    }
+    
+    if (!target) return null
+
+    const buffer = await target.screenshot({type: "png"})
+    
+    await page.close()
+
+    return buffer
 }

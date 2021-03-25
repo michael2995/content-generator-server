@@ -1,1 +1,2 @@
-export * from "./convert2png"
+export * from "./html2png"
+export * from "./element2png"
