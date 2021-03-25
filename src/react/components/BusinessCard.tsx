@@ -36,7 +36,7 @@ const BusinessCardBack = ({
                         <div style={styles.companyContact}>
                             <div style={styles.marginRight8}>T. 02. 568. 4909</div>
                             <div style={styles.marginRight8}>F. 02. 568. 4908</div>        
-                            <div>W. company.zigbang.com</div>
+                            <div id="nested">W. company.zigbang.com</div>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@ const BusinessCardFront = ({
                     <div style={styles.frontRole}>
                         <div>{part}</div>
                         <div style={styles.frontRoleSeperator}>/</div>
-                        <div>{role}</div>
+                        <div id="nested">{role}</div>
                     </div>
                 </div>
             </div>

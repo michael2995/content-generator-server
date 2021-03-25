@@ -20,9 +20,11 @@ export async function html2png(html: string) {
         </body>
         </html>
     `)
-    
-    await page.waitForTimeout(10)
 
+    await page.waitForSelector("#target #nested", {
+        visible: true
+    })
+   
     const target = await page.$("#target")
     
     if (!target) return null
