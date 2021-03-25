@@ -2,7 +2,7 @@ import {browser} from "../module"
 
 export async function html2png(html: string) {
     const page = await browser.newPage()
-    await page.setViewport({deviceScaleFactor: 10, height: 1920, width: 1280})
+    await page.setViewport({deviceScaleFactor: 2, height: 1920, width: 1280})
     await page.setContent(`
         <!DOCTYPE html>
         <html lang="en">
