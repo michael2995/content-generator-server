@@ -35,7 +35,7 @@ export async function html2png(html: string) {
                 } else {
                     resolve("ok")
                 }
-            }, 100)
+            }, 1000)
         })
 
         return ensureRenderFinished()
