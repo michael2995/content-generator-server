@@ -20,11 +20,10 @@ export async function html2png(html: string) {
         </body>
         </html>
     `)
-
-    await page.waitForSelector("#target #nested", {
-        visible: true
-    })
    
+    const nested = await page.$("#target #nested")
+    const box = await nested?.boxModel()
+    console.log(box)
     const target = await page.$("#target")
     
     if (!target) return null
