@@ -32,8 +32,8 @@ const getController: RequestHandler<{}, GetResponse, undefined, GetQuery> = asyn
     fs.writeFileSync(tmp_back_filepath, backBuffer)
 
     res.json({
-        front: `${process.env.SERVER_ENDPOINT}/file?name=${tmp_front_img}`,
-        back: `${process.env.SERVER_ENDPOINT}/file?name=${tmp_back_img}`,
+        front: `${process.env.SERVER_ENDPOINT}:${process.env.PORT}/file?name=${tmp_front_img}`,
+        back: `${process.env.SERVER_ENDPOINT}:${process.env.PORT}/file?name=${tmp_back_img}`,
     })
 }
 
