@@ -15,13 +15,21 @@ const BusinessCardBack = ({
                     </div>
                     <div style={styles.backRole}>
                         <div>{part}</div>
-                        <div style={styles.backRoleSeperator}>/</div>
-                        <div>{role}</div>
+                        {role && (
+                            <>
+                            <div style={styles.backRoleSeperator}>/</div>
+                            <div>{role}</div>
+                            </>
+                        )}
                     </div>
                     <div style={styles.backContact}>
                         <div>{phone.replace("-", ". ")}</div>
-                        <div style={styles.backContactSeperator}>|</div>
-                        <div>{email}</div>
+                        {email && (
+                            <>
+                            <div style={styles.backContactSeperator}>|</div>
+                            <div>{email}</div>
+                            </>
+                        )}
                     </div>
                 </div>
                 <div>
@@ -58,8 +66,12 @@ const BusinessCardFront = ({
                     <div style={styles.frontName}>{name}</div>
                     <div style={styles.frontRole}>
                         <div>{part}</div>
-                        <div style={styles.frontRoleSeperator}>/</div>
-                        <div id="nested">{role}</div>
+                        {role && (
+                            <>
+                            <div style={styles.frontRoleSeperator}>/</div>
+                            <div id="nested">{role}</div>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
