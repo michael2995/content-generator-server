@@ -10,7 +10,7 @@ const getController: RequestHandler<undefined, string, undefined, GetQuery> = as
     const filepath = path.resolve(__tmpdir, name)
     res.sendFile(filepath, (err) => {
         if (err) throw err
-        fs.rmSync(filepath)
+        fs.unlinkSync(filepath)
     })
     
 }
