@@ -11,7 +11,7 @@ const BusinessCardBack = ({
                 <div>
                     <div style={styles.backName}>
                         <div>{name}</div>
-                        <div style={styles.backNameSub}>WE NEED ROMANIZATION HERE</div>
+                        {/* <div style={styles.backNameSub}>WE NEED ROMANIZATION HERE</div> */}
                     </div>
                     <div style={styles.backRole}>
                         <div>{part}</div>
