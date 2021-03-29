@@ -23,7 +23,7 @@ const BusinessCardBack = ({
                         )}
                     </div>
                     <div style={styles.backContact}>
-                        <div>{phone.replace("-", ". ")}</div>
+                        <div>{phone.replace(/\-/g, ". ")}</div>
                         {email && (
                             <>
                             <div style={styles.backContactSeperator}>|</div>
