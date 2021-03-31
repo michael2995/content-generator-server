@@ -12,12 +12,9 @@ export class ConvertController {
 
     @Put()
     async convertAsUrl(
-        @Req() req: Request,
         @Res() res: Response,
         @Body() body: string,
     ) {
-        console.log(req.readable)
-        console.log(body)
         const {html2png} = this.convertService
         const {getTempUrl} = this.fileService
         const buffer = await html2png(body)

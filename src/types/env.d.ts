@@ -3,6 +3,7 @@ declare global {
         interface ProcessEnv {
             SERVER_ENDPOINT: string
             PORT: string
+            BUCKET_NAME: string
         }
     }
 }
