@@ -4,6 +4,7 @@ declare global {
             SERVER_ENDPOINT: string
             PORT: string
             BUCKET_NAME: string
+            BUCKET_FOLDER: string
         }
     }
 }
