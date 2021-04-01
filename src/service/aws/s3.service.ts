@@ -23,6 +23,8 @@ export class S3Service {
     }
 
     private ensureBucket = async () => {
+        console.log("ensuring bucket")
+        console.log("current environment variables: ", process.env)
         const list = await this.listBuckets()
         const existing = list.Buckets?.find((bucket) => bucket.Name === this.name)
         if (existing) return true

@@ -16,6 +16,7 @@ export class ConvertService {
     html2png = async (html: string): Promise<string | Buffer | void> => {
         return new Promise(async (resolve, reject) => {
             const browser = await this.browserService.getBrowser()
+            if (!browser) return reject("Browser is not launched")
             const page = await browser.newPage()
         
             page.on("load", async() => {
