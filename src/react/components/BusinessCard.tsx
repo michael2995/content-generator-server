@@ -87,9 +87,9 @@ export const BusinessCard = (props: BusinessCardProps) => {
 
 export interface BusinessCardProps {
     name: string
-    email: string
+    email?: string
     part: string
-    role: string
+    role?: string
     phone: string
     side?: "front" | "back"
 }

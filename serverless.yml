@@ -9,6 +9,21 @@ plugins:
 configValidationMode: error
 variablesResolutionMode: 20210326
 
+
+custom:
+  serverless-offline:
+    httpPort: ${self:provider.environment.PORT}
+  
+  API_GATEWAY_ENDPOINT: "https://og690eoylg.execute-api.us-east-1.amazonaws.com"
+  SERVER_ENDPOINT: 
+    dev: "${self:custom.API_GATEWAY_ENDPOINT}/dev"
+    prod: "${self:custom.API_GATEWAY_ENDPOINT}/prod"
+    local: "http://localhost:${self:provider.environment.PORT}/${env:STAGE}"
+  
+  prune:
+    automatic: true
+    number: 3
+
 provider:
   environment:
     PORT: 2995
@@ -50,13 +65,3 @@ functions:
       BUCKET_NAME: ${self:provider.environment.BUCKET_NAME}
       BUCKET_FOLDER: ${self:provider.environment.BUCKET_FOLDER}
       SERVER_ENDPOINT: ${self:provider.environment.SERVER_ENDPOINT}
-
-custom:
-  serverless-offline:
-    httpPort: ${self:provider.environment.PORT}
-  
-  API_GATEWAY_ENDPOINT: "https://og690eoylg.execute-api.us-east-1.amazonaws.com"
-  SERVER_ENDPOINT: 
-    dev: "${self:custom.API_GATEWAY_ENDPOINT}/dev"
-    prod: "${self:custom.API_GATEWAY_ENDPOINT}/prod"
-    local: "http://localhost:${self:provider.environment.PORT}/${env:STAGE}"

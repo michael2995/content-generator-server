@@ -2,11 +2,10 @@ import { Controller, Get, Query, Res } from "@nestjs/common";
 import { Response } from "express";
 import { Personnel } from "../interface/personnel.interface";
 import { BusinessCard } from "../react/components";
-import { BrowserService } from "../service/browser.service";
 import { ConvertService } from "../service/convert.service";
 import { FileService } from "../service/file.service";
 
-const getQueryKeys = ["name", "email", "phone", "part", "role"] as const;
+const requiredKeys = ["name", "phone", "part"] as const;
 
 @Controller("card")
 export class CardController {
@@ -20,7 +19,7 @@ export class CardController {
         const {element2png} = this.convertService
         const {getTempUrl} = this.fileService
         const {email, name, part, phone, role} = query
-        for (const queryKey of getQueryKeys) {
+        for (const queryKey of requiredKeys) {
             if (!query[queryKey]) return res.status(400).send(`${queryKey} is undefined`)
         }
 
