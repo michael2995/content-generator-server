@@ -12,10 +12,8 @@ variablesResolutionMode: 20210326
 provider:
   environment:
     PORT: 2995
-    IS_LOCAL: false
     BUCKET_FOLDER: html2png
     BUCKET_NAME: msg-tmp-bucket
-    PUPPETEER_SKIP_DOWNLOAD: true
     SERVER_ENDPOINT: ${self:custom.SERVER_ENDPOINT.${env:STAGE}}
   name: aws
   runtime: nodejs12.x
@@ -24,6 +22,9 @@ provider:
   stage: ${env:STAGE}
   region: us-east-1
   timeout: 30
+  apiGateway:
+    binaryMediaTypes:
+      - "*/*"
   iam:
     role:
       statements:

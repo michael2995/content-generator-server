@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "STAGE=local sls offline",
-    "clean": "rm -rf ./dist ./node_modules",
+    "clean": "rm -rf dist node_modules .serverless .build",
     "deploy:sls:dev": "STAGE=dev sls deploy",
     "deploy:sls:prod": "STAGE=prod sls deploy"
   },
