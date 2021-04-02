@@ -3,3 +3,8 @@ _tmp/
 dist/
 .env
 .DS_Store
+nodejs/
+*.zip
+.aws-sam/
+.build/
+.serverless

@@ -1,0 +1,61 @@
+service: content-generator-server
+app: content-generator
+org: monthem
+frameworkVersion: '2'
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+configValidationMode: error
+variablesResolutionMode: 20210326
+
+provider:
+  environment:
+    PORT: 2995
+    IS_LOCAL: false
+    BUCKET_FOLDER: html2png
+    BUCKET_NAME: msg-tmp-bucket
+    PUPPETEER_SKIP_DOWNLOAD: true
+    SERVER_ENDPOINT: ${self:custom.SERVER_ENDPOINT.${env:STAGE}}
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  profile: monthem
+  stage: ${env:STAGE}
+  region: us-east-1
+  timeout: 30
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "s3:*"
+          Resource: arn:aws:s3:::msg-tmp-bucket
+
+functions:
+  main:
+    memorySize: 1024
+    handler: src/lambda.handler
+    role: arn:aws:iam::820198943706:role/service-role/LambdaWithS3FullAccess
+    events:
+      - http:
+          method: ANY
+          path: /
+      - http:
+          method: ANY
+          path: '{proxy+}'
+    environment:
+      PORT: ${self:provider.environment.PORT}
+      BUCKET_NAME: ${self:provider.environment.BUCKET_NAME}
+      BUCKET_FOLDER: ${self:provider.environment.BUCKET_FOLDER}
+      SERVER_ENDPOINT: ${self:provider.environment.SERVER_ENDPOINT}
+
+custom:
+  serverless-offline:
+    httpPort: ${self:provider.environment.PORT}
+  
+  API_GATEWAY_ENDPOINT: "https://og690eoylg.execute-api.us-east-1.amazonaws.com"
+  SERVER_ENDPOINT: 
+    dev: "${self:custom.API_GATEWAY_ENDPOINT}/dev"
+    prod: "${self:custom.API_GATEWAY_ENDPOINT}/prod"
+    local: "http://localhost:${self:provider.environment.PORT}/${env:STAGE}"
